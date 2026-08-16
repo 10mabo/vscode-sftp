@@ -1,4 +1,4 @@
-# SFTP Sync Extension for VS Code
+# Remote SFTP/FTP File Editing for VS Code
 
 [**vscode-sftp**](https://github.com/10mabo/vscode-sftp)
 forked from [Natizyskunk/vscode-sftp](https://github.com/Natizyskunk/vscode-sftp)

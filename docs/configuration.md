@@ -3,10 +3,6 @@
 ## name
 *string*: A string to identify your configuration.
 
-## context
-*string*: A path relative to the workspace root folder.
-Use this when you want to map a subfolder to the `remotePath`.
-
 **default**: The workspace root.
 
 ## protocol
@@ -82,7 +78,7 @@ If set to true, the `useTempFile` option must also be set to true.
 *boolean*: Update the destination only if a newer version is on the source filesystem.
 
 ## ignore
-*string[]*: Same behavior as gitignore, all paths relative to context of the current configuration.
+*string[]*: Same behavior as gitignore
 
 **default**: []
 
