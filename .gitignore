@@ -6,9 +6,12 @@ test/test.js
 _debug
 TODO.md
 INSTALL_DEBUG.md
+__marc
+__marc.txt
 
 ### Extensions ###
 sftp-*.vsix
+*.vsix
 
 ### VS Code ###
 .vscode/**

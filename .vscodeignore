@@ -9,3 +9,6 @@
 !LICENSE
 !resources/**/*
 !schema/**/*
+__marc
+__marc.txt
+*.vsix

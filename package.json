@@ -1,21 +1,21 @@
 {
   "name": "sftp",
   "displayName": "SFTP",
-  "description": "SFTP/FTP sync",
-  "version": "1.16.3",
-  "publisher": "Natizyskunk",
-  "author": "Natizyskunk <natan.fourie@hotmail.fr> (https://github.com/Natizyskunk)",
+  "description": "Remote SFTP/FTP File Editing",
+  "version": "1.0.0",
+  "publisher": "10mabo",
+  "author": "Marc Bonn <mail@10mb.de>",
   "engines": {
     "vscode": "^1.64.2"
   },
   "bugs": {
-    "url": "https://github.com/Natizyskunk/vscode-sftp/issues",
-    "email": "natan.fourie@hotmail.fr"
+    "url": "https://github.com/10mabo/vscode-sftp/issues",
+    "email": "mail@10mb.de"
   },
-  "homepage": "https://github.com/Natizyskunk/vscode-sftp/blob/master/README.md",
+  "homepage": "https://github.com/10mabo/vscode-sftp",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Natizyskunk/vscode-sftp.git"
+    "url": "https://github.com/10mabo/vscode-sftp.git"
   },
   "license": "MIT",
   "categories": [
@@ -702,7 +702,7 @@
     "lodash.debounce": "^4.0.8",
     "lru-cache": "^4.1.3",
     "p-queue": "2.4.2",
-    "ssh-config": "^1.1.3",
+    "ssh-config": "^1.1.6",
     "ssh2": "^1.13.0",
     "tmp": "^0.2.1",
     "upath": "^2.0.1"
