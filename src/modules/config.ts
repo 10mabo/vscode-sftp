@@ -72,7 +72,7 @@ const defaultConfig = {
   // common
   // name: undefined,
   remotePath: './',
-  uploadOnSave: false,
+  uploadOnSave: true,
   useTempFile: false,
   openSsh: false,
   downloadOnOpen: false,
@@ -90,7 +90,7 @@ const defaultConfig = {
 
   // server common
   // host,
-  // port,
+  port:22,
   // username,
   // password,
   connectTimeout: 10 * 1000,
@@ -98,7 +98,7 @@ const defaultConfig = {
   // sftp
   // agent,
   // privateKeyPath,
-  // passphrase,
+  passphrase: null,
   interactiveAuth: false,
   // algorithms,
 
