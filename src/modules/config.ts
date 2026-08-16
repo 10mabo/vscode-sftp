@@ -11,7 +11,6 @@ const nullable = schema => schema.optional().allow(null);
 const configScheme = {
   name: Joi.string(),
 
-  context: Joi.string(),
   protocol: Joi.any().valid('sftp', 'ftp', 'local'),
 
   host: Joi.string().required(),

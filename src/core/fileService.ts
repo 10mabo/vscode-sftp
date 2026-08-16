@@ -19,7 +19,6 @@ type Omit<T, U> = Pick<T, Exclude<keyof T, U>>;
 
 interface Root {
   name: string;
-  context: string;
   watcher: WatcherConfig;
   defaultProfile: string;
 }

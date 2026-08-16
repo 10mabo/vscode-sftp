@@ -7,8 +7,9 @@ import { UResource, FileService, TransferTask } from '../../core';
 import { validateConfig } from '../config';
 import watcherService from '../fileWatcher';
 import Trie from './trie';
+import * as crypto from 'crypto';
+import * as os from 'os';
 
-const WIN_DRIVE_REGEX = /^([a-zA-Z]):/;
 const isWindows = process.platform === 'win32';
 
 const serviceManager = new Trie<FileService>(
@@ -55,34 +56,22 @@ function normalizePathForTrie(pathname) {
   return path.normalize(pathname);
 }
 
-export function getBasePath(context: string, workspace: string) {
-  let dirpath;
-  if (context) {
-    if (path.isAbsolute(context)) {
-      dirpath = context;
-      if (isWindows) {
-        const contextBeginWithDrive = context.match(WIN_DRIVE_REGEX);
-        // if a windows user omit drive, we complete it with a drive letter same with the workspace one
-        if (!contextBeginWithDrive) {
-          const workspaceDrive = workspace.match(WIN_DRIVE_REGEX);
-          if (workspaceDrive) {
-            const drive = workspaceDrive[1];
-            dirpath = path.join(`${drive}:`, context);
-          }
-        }
-      }
-    } else {
-      // Don't use path.resolve bacause it may change the root dir of workspace!
-      // Example: On window path.resove('\\a\\b\\c') will result to '<drive>:\\a\\b\\c'
-      // We know workspace must be a absolute path and context is a relative path to workspace,
-      // so path.join will suit our requirements.
-      dirpath = path.join(workspace, context);
-    }
-  } else {
-    dirpath = workspace;
-  }
+function getBasePath(config: any): string {
+  const identity = [
+    config.protocol || 'sftp',
+    config.host || '',
+    config.port || '',
+    config.username || '',
+    config.remotePath || '',
+  ].join('|');
 
-  return normalizePathForTrie(dirpath);
+  const hash = crypto
+    .createHash('sha256')
+    .update(identity)
+    .digest('hex')
+    .substr(0, 16);
+
+  return path.join(os.homedir(), '.sftp', 'tmp', hash);
 }
 
 export function createFileService(config: any, workspace: string) {
@@ -90,11 +79,23 @@ export function createFileService(config: any, workspace: string) {
     app.state.profile = config.defaultProfile;
   }
 
-  const normalizedBasePath = getBasePath(config.context, workspace);
+  const normalizedBasePath = getBasePath(config);
+
+  console.log(
+    `[SFTP DEBUG] createFileService: host=${config.host}, ` +
+    `user=${config.username}, ` +
+    `remotePath=${config.remotePath}, ` +
+    `basePath=${normalizedBasePath}, ` +
+    `name=${config.name}`
+  );
+
   const service = new FileService(normalizedBasePath, workspace, config);
 
   logger.info(`config at ${normalizedBasePath}`, maskConfig(config));
 
+  console.log(
+    `[SFTP DEBUG] ADD: ${config.host} -> ${normalizedBasePath}`
+  );
   serviceManager.add(normalizedBasePath, service);
   service.name = config.name;
   service.setConfigValidator(validateConfig);

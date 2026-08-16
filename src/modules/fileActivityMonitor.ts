@@ -95,7 +95,7 @@ function watchWorkspace({
 
   workspaceWatcher = onDidSaveTextDocument((doc: vscode.TextDocument) => {
     const uri = doc.uri;
-    if (!isValidFile(uri) || !isInWorkspace(uri.fsPath)) {
+    if (!isValidFile(uri)/*  || !isInWorkspace(uri.fsPath) */) {
       return;
     }
 
